@@ -1,0 +1,342 @@
+{
+  "cakes": [
+    {
+      "cakeId": "cake-1",
+      "name": "Chocolate Truffle Cake",
+      "category": "birthday",
+      "price": 399,
+      "originalPrice": 549,
+      "rating": 4.9,
+      "reviews": 120,
+      "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake1.png",
+      "badge": "Bestseller"
+    },
+    {
+      "cakeId": "cake-2",
+      "name": "Red Velvet Raspberry Cake",
+      "category": "anniversary",
+      "price": 429,
+      "originalPrice": 599,
+      "rating": 4.8,
+      "reviews": 98,
+      "image": "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake2.png",
+      "badge": "Couple Favorite"
+    },
+    {
+      "cakeId": "cake-3",
+      "name": "Fresh Ratnagiri Mango Cake",
+      "category": "celebrations",
+      "price": 449,
+      "originalPrice": 620,
+      "rating": 4.85,
+      "reviews": 145,
+      "image": "https://images.unsplash.com/photo-1542826438-bd32f43d626f?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake3.png",
+      "badge": "Seasonal Pick"
+    },
+    {
+      "cakeId": "cake-4",
+      "name": "Belgian Dark Chocolate Ganache",
+      "category": "anniversary",
+      "price": 499,
+      "originalPrice": 699,
+      "rating": 4.9,
+      "reviews": 142,
+      "image": "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake4.png",
+      "badge": "Pure Indulgence"
+    },
+    {
+      "cakeId": "cake-5",
+      "name": "Classic Pineapple Gateau",
+      "category": "birthday",
+      "price": 349,
+      "originalPrice": 499,
+      "rating": 4.7,
+      "reviews": 85,
+      "image": "https://images.unsplash.com/photo-1562777717-dc6984f65a63?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake5.png",
+      "badge": "Tropical Classic"
+    },
+    {
+      "cakeId": "cake-6",
+      "name": "Butterscotch Caramel Crunch",
+      "category": "birthday",
+      "price": 379,
+      "originalPrice": 520,
+      "rating": 4.75,
+      "reviews": 90,
+      "image": "https://images.unsplash.com/photo-1535141192574-5d4897c13136?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake1.png",
+      "badge": "Nutty Toffee"
+    },
+    {
+      "cakeId": "cake-7",
+      "name": "Blueberry Cheesecake",
+      "category": "celebrations",
+      "price": 549,
+      "originalPrice": 750,
+      "rating": 4.9,
+      "reviews": 110,
+      "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake2.png",
+      "badge": "Chef Signature"
+    },
+    {
+      "cakeId": "cake-8",
+      "name": "Tiered Wedding Elegance Gateau",
+      "category": "wedding",
+      "price": 999,
+      "originalPrice": 1499,
+      "rating": 5,
+      "reviews": 76,
+      "image": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/hero_cake.png",
+      "badge": "Grand Tier"
+    },
+    {
+      "cakeId": "cake-9",
+      "name": "Pastel Strawberry Cream Cake",
+      "category": "babyshower",
+      "price": 399,
+      "originalPrice": 549,
+      "rating": 4.7,
+      "reviews": 89,
+      "image": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake3.png",
+      "badge": "Pastel Blush"
+    },
+    {
+      "cakeId": "cake-10",
+      "name": "Rich Hazelnut Nutella Crunch",
+      "category": "birthday",
+      "price": 499,
+      "originalPrice": 699,
+      "rating": 4.92,
+      "reviews": 135,
+      "image": "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=600&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake4.png",
+      "badge": "Nutella Supreme"
+    }
+  ],
+  "spotlights": [
+    {
+      "spotlightId": "spotlight-1",
+      "day": "Monday Special",
+      "tag": "CHEF'S DAILY PICK",
+      "batch": "Batch #B-301",
+      "title": "Royal Saffron Pistachio Dome",
+      "bakedTime": "Freshly Baked at 7:00 AM",
+      "stockLeft": "Only 4 Left Today",
+      "rating": 4.98,
+      "reviews": 148,
+      "desc": "Sublime Kashmiri saffron milk sponge layered with Iranian pistachio cream, fragrant edible rose petal jelly, and toasted almond praline crunch.",
+      "price": 499,
+      "originalPrice": 699,
+      "image": "https://images.unsplash.com/photo-1627834377411-8da5f4f09de8?w=700&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/hero_cake.png",
+      "ingredients": [
+        "100% Eggless Option",
+        "Kashmiri Saffron",
+        "Iranian Pistachios"
+      ]
+    },
+    {
+      "spotlightId": "spotlight-2",
+      "day": "Tuesday Special",
+      "tag": "DARK CHOCOLATE NOIR",
+      "batch": "Batch #B-302",
+      "title": "Belgian Noir Dark Truffle Gateau",
+      "bakedTime": "Freshly Baked at 8:15 AM",
+      "stockLeft": "Only 2 Left Today",
+      "rating": 4.97,
+      "reviews": 215,
+      "desc": "Triple layer 70% dark Belgian chocolate sponge infused with espresso velvet ganache, crowned with hand-rolled gold-dusted truffles and dark crisp pearls.",
+      "price": 549,
+      "originalPrice": 749,
+      "image": "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=700&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake1.png",
+      "ingredients": [
+        "70% Belgian Cocoa",
+        "Pure Butter Ganache",
+        "Gold Dust Pearls"
+      ]
+    },
+    {
+      "spotlightId": "spotlight-3",
+      "day": "Wednesday Special",
+      "tag": "SIGNATURE FRUIT",
+      "batch": "Batch #B-303",
+      "title": "Alphonso Mango Mascarpone Bliss",
+      "bakedTime": "Freshly Baked at 7:30 AM",
+      "stockLeft": "Only 5 Left Today",
+      "rating": 4.95,
+      "reviews": 180,
+      "desc": "Layers of feather-light vanilla sponge soaked in natural mango coulis, layered with rich Italian mascarpone cream and fresh Alphonso mango rosettes.",
+      "price": 479,
+      "originalPrice": 679,
+      "image": "https://images.unsplash.com/photo-1542826438-bd32f43d626f?w=700&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake2.png",
+      "ingredients": [
+        "Fresh Alphonso Mangoes",
+        "Italian Mascarpone",
+        "100% Eggless Option"
+      ]
+    },
+    {
+      "spotlightId": "spotlight-4",
+      "day": "Weekend Exclusive",
+      "tag": "EXOTIC BERRY",
+      "batch": "Batch #B-304",
+      "title": "Exotic Kashmiri Rose & Berry Velvet",
+      "bakedTime": "Freshly Baked at 6:45 AM",
+      "stockLeft": "Only 3 Left Today",
+      "rating": 4.96,
+      "reviews": 320,
+      "desc": "Silky crimson cocoa crumb layered with authentic Philadelphia cream cheese frosting, wild raspberry compote, and organic rosewater glaze.",
+      "price": 599,
+      "originalPrice": 799,
+      "image": "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=700&auto=format&fit=crop&q=80",
+      "fallbackImg": "./assets/cake3.png",
+      "ingredients": [
+        "Wild Berry Compote",
+        "Organic Rosewater",
+        "Philadelphia Cream Cheese"
+      ]
+    }
+  ],
+  "admin": {
+    "username": "admin",
+    "passwordHash": "$2b$10$N.zfWR6D6Rd5vh3HnrpfDeMRo5QybqDYbqfkS9opENZvX7uoZP6iW"
+  },
+  "orders": [
+    {
+      "orderId": "ORD-4567",
+      "customerPhone": "9876543210",
+      "customerName": "Pooja Sharma",
+      "deliveryNotes": "Extra chocolate flakes please",
+      "items": [
+        {
+          "name": "Chocolate Truffle Cake",
+          "price": 399,
+          "qty": 1,
+          "image": "./assets/cake1.png"
+        }
+      ],
+      "subtotal": 399,
+      "advanceRequired": 200,
+      "status": "Approved",
+      "whatsappNotificationSent": true,
+      "whatsappMessageContent": "Hello! Your order (#ORD-4567) at Siddhivinayak Cake Shop has been approved. Please complete your advance payment using this secure QR Scanner: https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D200%26tn%3DAdvance%2520for%2520ORD-4567%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "paymentQrUrl": "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D200%26tn%3DAdvance%2520for%2520ORD-4567%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "createdAt": "2026-11-09T11:51:11.922Z"
+    },
+    {
+      "orderId": "ORD-2043",
+      "customerPhone": "9876543210",
+      "customerName": "Priya Sharma",
+      "deliveryNotes": "Please deliver before 6 PM celebration",
+      "items": [
+        {
+          "name": "Custom 2-Tier Belgian Chocolate",
+          "price": 1980,
+          "qty": 1,
+          "image": "./assets/hero_cake.png",
+          "isCustom": true,
+          "customDetails": {
+            "tiers": 2,
+            "spongeFlavor": "Belgian Chocolate",
+            "frosting": "Whipped Chocolate Ganache",
+            "isEggless": true,
+            "toppings": [
+              "Edible Gold Leaf",
+              "Fresh Berry Medley"
+            ],
+            "customMessage": "Happy 25th Anniversary Mom & Dad",
+            "estimatedWeightKg": 2
+          }
+        }
+      ],
+      "subtotal": 1980,
+      "advanceRequired": 990,
+      "status": "Approved",
+      "whatsappNotificationSent": true,
+      "whatsappMessageContent": "Hello! Your order (#ORD-2043) at Siddhivinayak Cake Shop has been approved. Please complete your advance payment using this secure QR Scanner: https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D990%26tn%3DAdvance%2520for%2520ORD-2043%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "paymentQrUrl": "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D990%26tn%3DAdvance%2520for%2520ORD-2043%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "createdAt": "2026-11-09T04:55:39.078Z"
+    },
+    {
+      "orderId": "ORD-7292",
+      "customerPhone": "8208872803",
+      "customerName": "pranay gharat",
+      "deliveryNotes": "",
+      "items": [
+        {
+          "name": "Chocolate Truffle Cake",
+          "price": 999,
+          "qty": 1,
+          "image": "./assets/cake1.png"
+        }
+      ],
+      "subtotal": 999,
+      "advanceRequired": 500,
+      "status": "Approved",
+      "whatsappNotificationSent": true,
+      "whatsappMessageContent": "Hello! Your order (#ORD-7292) at Siddhivinayak Cake Shop has been approved. Please complete your advance payment using this secure QR Scanner: https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D500%26tn%3DAdvance%2520for%2520ORD-7292%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "paymentQrUrl": "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D500%26tn%3DAdvance%2520for%2520ORD-7292%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "createdAt": "2026-11-09T04:39:15.571Z"
+    },
+    {
+      "orderId": "ORD-3077",
+      "customerPhone": "9876543210",
+      "customerName": "Test Buyer",
+      "deliveryNotes": "Extra napkins please",
+      "items": [
+        {
+          "name": "Chocolate Truffle Cake",
+          "price": 999,
+          "qty": 1,
+          "image": "./assets/cake1.png"
+        }
+      ],
+      "subtotal": 999,
+      "advanceRequired": 500,
+      "status": "Approved",
+      "whatsappNotificationSent": true,
+      "whatsappMessageContent": "Hello! Your order (#ORD-3077) at Siddhivinayak Cake Shop has been approved. Please complete your advance payment using this secure QR Scanner: https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D500%26tn%3DAdvance%2520for%2520ORD-3077%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "paymentQrUrl": "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D500%26tn%3DAdvance%2520for%2520ORD-3077%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "createdAt": "2026-11-09T04:17:39.925Z"
+    },
+    {
+      "orderId": "ORD-101",
+      "customerPhone": "9876543210",
+      "customerName": "Aarav Mehta",
+      "deliveryNotes": "Please add happy anniversary topper card",
+      "items": [
+        {
+          "name": "Red Velvet Raspberry Cake",
+          "price": 899,
+          "qty": 1,
+          "image": "./assets/cake2.png"
+        }
+      ],
+      "subtotal": 899,
+      "advanceRequired": 450,
+      "status": "Approved",
+      "whatsappNotificationSent": true,
+      "whatsappMessageContent": "Hello! Your order (#ORD-101) at Siddhivinayak Cake Shop has been approved. Please complete your advance payment using this secure QR Scanner: https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D450%26tn%3DAdvance%2520for%2520ORD-101%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "paymentQrUrl": "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dsiddhivinayakcakes%40upi%26pn%3DSiddhivinayakCakeShop%26am%3D450%26tn%3DAdvance%2520for%2520ORD-101%2520Siddhivinayak%2520Cakes%26cu%3DINR&bgcolor=FFFBF7&color=16233B&qzone=2",
+      "createdAt": "2026-11-09T03:52:39.744Z"
+    }
+  ],
+  "subscribers": [
+    {
+      "phone": "9123456789",
+      "couponCode": "SWEETVIP15",
+      "status": "Active",
+      "subscribedAt": "2026-11-09T11:51:11.895Z"
+    }
+  ]
+}

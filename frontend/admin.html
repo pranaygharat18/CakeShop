@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard &mdash; Siddhivinayak Cake Shop</title>
+  <link rel="icon" type="image/png" href="./assets/logo.png">
+  
+  <!-- Fonts: Epilogue & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Epilogue', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            primary: '#FF3366',
+            primaryHover: '#E02456',
+            charcoal: '#1E2229',
+            stoneGrey: '#5A606D',
+            canvas: '#FFFBF7',
+            borderSubtle: '#F3E9E2',
+            surfaceAccent: '#FFE4E9',
+            mintGreen: '#DCFCE7',
+            mintText: '#15803D'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons & Socket.io Client -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <!-- Modular Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="min-h-screen bg-canvas text-charcoal antialiased flex flex-col justify-between">
+
+  <!-- REAL-TIME NEW ORDER POPUP BANNER (WITH SOUND) -->
+  <div id="newOrderBanner" class="fixed top-20 right-6 z-50 bg-white border-2 border-primary rounded-3xl p-5 shadow-2xl max-w-sm hidden transform translate-y-4 transition-all duration-300">
+    <div class="flex items-start gap-3.5">
+      <div class="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center shrink-0 bell-pulse">
+        <i data-lucide="bell-ring" class="w-6 h-6"></i>
+      </div>
+      <div class="flex-1">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 bg-surfaceAccent text-primary rounded-full">New Cake Order!</span>
+          <button onclick="dismissOrderBanner()" class="text-stoneGrey hover:text-charcoal p-1">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <h4 class="font-display font-extrabold text-sm text-charcoal mt-1" id="bannerOrderId">Order #ORD-XXXX</h4>
+        <p class="text-xs text-stoneGrey mt-0.5" id="bannerCustomer">Customer: 9876543210</p>
+        <p class="text-xs font-bold text-primary mt-1" id="bannerTotal">Amount: ₹999</p>
+        <div class="pt-2 mt-2 border-t border-borderSubtle flex items-center gap-2">
+          <button onclick="viewNewOrdersTab()" class="px-3.5 py-1.5 bg-primary text-white rounded-full text-xs font-bold hover:bg-primaryHover transition-colors flex items-center gap-1.5 shadow-sm">
+            <span>Review & Approve</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP ADMIN BAR -->
+  <header class="bg-white border-b border-borderSubtle sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="./assets/logo.png" alt="Logo" class="w-9 h-9 object-contain rounded-full border border-borderSubtle bg-white p-0.5 shadow-sm" onerror="this.onerror=null; this.src='./logo.png';">
+          <div>
+            <span class="font-display font-extrabold text-base text-charcoal block leading-none">Siddhivinayak</span>
+            <span class="text-[10px] font-bold text-primary tracking-widest uppercase">Owner Portal</span>
+          </div>
+        </a>
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-mintGreen text-mintText rounded-full text-xs font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          Live Real-Time
+        </span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Audio Enablement Toggle Pill -->
+        <button id="audioToggleBtn" onclick="toggleAudioAlerts()" class="text-xs font-semibold px-3 py-1.5 rounded-full border border-borderSubtle flex items-center gap-1.5 bg-canvas hover:bg-surfaceAccent transition-colors">
+          <i data-lucide="volume-2" class="w-3.5 h-3.5 text-primary" id="audioIcon"></i>
+          <span id="audioStatusText">Sound Alerts: ON</span>
+        </button>
+
+        <a href="index.html" target="_blank" class="text-xs font-semibold text-stoneGrey hover:text-primary transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-borderSubtle hover:bg-surfaceAccent/50">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <span>View Live Shop</span>
+        </a>
+
+        <div id="adminUserBadge" class="hidden flex items-center gap-2">
+          <span class="text-xs font-bold text-charcoal" id="loggedAdminName">admin</span>
+          <button onclick="handleLogout()" class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-full text-xs font-bold transition-colors">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+    
+    <!-- 1. AUTHENTICATION LOGIN CARD -->
+    <div id="loginSection" class="max-w-md mx-auto my-12 bg-white rounded-3xl p-8 border border-borderSubtle shadow-xl">
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-surfaceAccent text-primary flex items-center justify-center mx-auto mb-3 shadow-sm">
+          <i data-lucide="shield-check" class="w-7 h-7"></i>
+        </div>
+        <h2 class="font-display font-extrabold text-2xl text-charcoal">Admin Sign In</h2>
+        <p class="text-xs text-stoneGrey mt-1">Authenticate to manage real-time orders, approval flows, and bakery specials</p>
+      </div>
+
+      <form id="loginForm" onsubmit="event.preventDefault(); handleLogin();" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1.5">Username</label>
+          <input type="text" id="loginUsername" required class="w-full px-4 py-2.5 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="admin" value="admin">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1.5">Password</label>
+          <input type="password" id="loginPassword" required class="w-full px-4 py-2.5 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="••••••••" value="admin123">
+        </div>
+        <button type="submit" id="loginBtn" class="w-full py-3 bg-primary hover:bg-primaryHover text-white font-bold rounded-full text-sm shadow-md transition-all active:scale-95 flex items-center justify-center gap-2">
+          <span>Authenticate Session</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+        <p id="loginErrorMsg" class="hidden text-xs text-red-600 font-bold text-center mt-2"></p>
+      </form>
+      <div class="mt-6 pt-4 border-t border-borderSubtle text-center text-[11px] text-stoneGrey">
+        Default credentials: <span class="font-bold text-charcoal">admin</span> / <span class="font-bold text-charcoal">admin123</span>
+      </div>
+    </div>
+
+    <!-- 2. DASHBOARD VIEW (Shown when authenticated) -->
+    <div id="dashboardSection" class="hidden space-y-6">
+      
+      <!-- Top Overview Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-borderSubtle shadow-sm">
+        <div>
+          <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-charcoal">Bakery Management & Real-Time Orders</h1>
+          <p class="text-xs sm:text-sm text-stoneGrey mt-1">Order approval workflow with automated WhatsApp payment QR dispatch and inventory control.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="refreshData()" class="px-4 py-2 bg-canvas hover:bg-surfaceAccent text-charcoal rounded-full text-xs font-bold border border-borderSubtle flex items-center gap-2 transition-all">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            <span>Refresh</span>
+          </button>
+          <button onclick="openNewCakeModal()" class="px-5 py-2.5 bg-primary hover:bg-primaryHover text-white rounded-full text-xs font-bold shadow-md flex items-center gap-2 transition-all">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Add New Cake</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Navigation: Orders (First), Best Sellers, Daily Spotlights -->
+      <div class="flex items-center gap-2 sm:gap-3 border-b border-borderSubtle pb-2 overflow-x-auto">
+        <button id="tabOrdersBtn" onclick="switchTab('orders')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-primary text-white shadow-sm flex items-center gap-2 transition-all whitespace-nowrap">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>Customer Orders (<span id="ordersCountSpan">0</span>)</span>
+        </button>
+        <button id="tabCakesBtn" onclick="switchTab('cakes')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-white text-stoneGrey hover:text-primary border border-borderSubtle flex items-center gap-2 transition-all whitespace-nowrap">
+          <i data-lucide="cake" class="w-4 h-4"></i>
+          <span>Best Sellers Menu (<span id="cakeCountSpan">0</span>)</span>
+        </button>
+        <button id="tabSpotlightsBtn" onclick="switchTab('spotlights')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-white text-stoneGrey hover:text-primary border border-borderSubtle flex items-center gap-2 transition-all whitespace-nowrap">
+          <i data-lucide="flame" class="w-4 h-4"></i>
+          <span>Daily Chef Spotlights (<span id="spotlightCountSpan">0</span>)</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: REAL-TIME CUSTOMER ORDERS MANAGEMENT TABLE -->
+      <div id="tabOrdersContent" class="space-y-4">
+        <div class="bg-white rounded-3xl border border-borderSubtle shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-borderSubtle flex items-center justify-between bg-canvas/60">
+            <div>
+              <h3 class="font-display font-bold text-base text-charcoal">Real-Time Cake Orders & Approval Flow</h3>
+              <p class="text-xs text-stoneGrey">Review incoming customer requests and dispatch automated WhatsApp advance payment QR codes.</p>
+            </div>
+            <span class="text-xs font-bold text-primary bg-surfaceAccent px-3 py-1 rounded-full flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+              Real-Time Socket Connected
+            </span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-borderSubtle bg-canvas/30 text-[11px] font-extrabold uppercase tracking-wider text-stoneGrey">
+                  <th class="p-4">Order Details</th>
+                  <th class="p-4">Customer Phone</th>
+                  <th class="p-4">Items Summary</th>
+                  <th class="p-4">Subtotal / Advance</th>
+                  <th class="p-4">Status</th>
+                  <th class="p-4 text-right">Owner Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody" class="divide-y divide-borderSubtle text-xs">
+                <!-- Orders dynamically rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: CAKES MANAGEMENT -->
+      <div id="tabCakesContent" class="hidden space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="adminCakesGrid">
+          <!-- Dynamically populated cake cards -->
+        </div>
+      </div>
+
+      <!-- TAB 3: SPOTLIGHTS MANAGEMENT -->
+      <div id="tabSpotlightsContent" class="hidden space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminSpotlightsGrid">
+          <!-- Dynamically populated spotlight cards -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ADVANCE PAYMENT QR SCANNER & WHATSAPP VERIFICATION MODAL -->
+  <div id="paymentScannerModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 border border-borderSubtle shadow-2xl text-center space-y-4">
+      <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="qr-code" class="w-5 h-5 text-primary"></i>
+          <h3 class="font-display font-bold text-base text-charcoal">Advance Payment QR Dispatched</h3>
+        </div>
+        <button onclick="closeScannerModal()" class="p-2 rounded-full hover:bg-surfaceAccent text-stoneGrey">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-1">
+        <span class="inline-block px-3 py-1 bg-mintGreen text-mintText font-bold text-xs rounded-full uppercase" id="scannerOrderId">ORDER #ORD-XXXX APPROVED</span>
+        <p class="text-xs text-stoneGrey pt-1">Automated WhatsApp advance payment notification generated for:</p>
+        <p class="text-sm font-extrabold text-charcoal" id="scannerCustomerPhone">+91 98765 43210</p>
+      </div>
+
+      <!-- Generated UPI QR Scanner Display -->
+      <div class="w-56 h-56 mx-auto bg-canvas p-3 rounded-2xl border-2 border-dashed border-primary/40 flex items-center justify-center shadow-inner">
+        <img id="scannerQrImage" src="" alt="UPI Payment QR Code" class="w-full h-full object-contain rounded-xl">
+      </div>
+
+      <!-- Advance Details -->
+      <div class="bg-canvas p-3 rounded-2xl border border-borderSubtle text-xs text-stoneGrey space-y-1 text-left">
+        <div class="flex justify-between">
+          <span>Required Advance:</span>
+          <span class="font-extrabold text-primary" id="scannerAdvanceAmount">₹0</span>
+        </div>
+        <div class="flex justify-between">
+          <span>UPI Payee ID:</span>
+          <span class="font-bold text-charcoal">siddhivinayakcakes@upi</span>
+        </div>
+        <div class="pt-2 border-t border-borderSubtle">
+          <p class="text-[11px] text-stoneGrey italic line-clamp-2" id="scannerMessagePreview"></p>
+        </div>
+      </div>
+
+      <!-- WhatsApp Dispatch Link Action -->
+      <div class="pt-2 flex flex-col gap-2">
+        <a id="scannerWhatsAppDirectLink" href="#" target="_blank" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-full text-xs shadow-md flex items-center justify-center gap-2 transition-all">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Open Direct WhatsApp Chat with Customer</span>
+        </a>
+        <button onclick="closeScannerModal()" class="w-full py-2 bg-canvas hover:bg-surfaceAccent text-stoneGrey rounded-full text-xs font-bold transition-colors">
+          Close Window
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAKE EDIT / CREATE MODAL -->
+  <div id="cakeModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-borderSubtle shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-borderSubtle mb-4">
+        <h3 id="cakeModalTitle" class="font-display font-bold text-lg text-charcoal">Edit Cake</h3>
+        <button onclick="closeCakeModal()" class="p-2 rounded-full hover:bg-surfaceAccent text-stoneGrey">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="cakeForm" onsubmit="event.preventDefault(); saveCake();" class="space-y-4">
+        <input type="hidden" id="cakeFormId">
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase mb-1">Cake Name</label>
+          <input type="text" id="cakeFormName" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Category</label>
+            <select id="cakeFormCategory" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+              <option value="birthday">Birthday</option>
+              <option value="anniversary">Anniversary</option>
+              <option value="celebrations">Celebrations</option>
+              <option value="wedding">Wedding</option>
+              <option value="babyshower">Baby Shower</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Badge Tag</label>
+            <input type="text" id="cakeFormBadge" class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Bestseller">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Price (₹)</label>
+            <input type="number" id="cakeFormPrice" required min="1" class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Original Price (₹)</label>
+            <input type="number" id="cakeFormOriginalPrice" min="1" class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase mb-1">Image URL / Path</label>
+          <input type="text" id="cakeFormImage" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="./assets/cake1.png">
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3 border-t border-borderSubtle">
+          <button type="button" onclick="closeCakeModal()" class="px-5 py-2 rounded-full border border-borderSubtle text-stoneGrey text-xs font-bold hover:bg-canvas">
+            Cancel
+          </button>
+          <button type="submit" class="px-6 py-2 bg-primary hover:bg-primaryHover text-white rounded-full text-xs font-bold shadow-md">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SPOTLIGHT EDIT MODAL -->
+  <div id="spotlightModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-borderSubtle shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-borderSubtle mb-4">
+        <h3 id="spotlightModalTitle" class="font-display font-bold text-lg text-charcoal">Edit Daily Spotlight</h3>
+        <button onclick="closeSpotlightModal()" class="p-2 rounded-full hover:bg-surfaceAccent text-stoneGrey">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="spotlightForm" onsubmit="event.preventDefault(); saveSpotlight();" class="space-y-4">
+        <input type="hidden" id="spotlightFormId">
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Day / Slot</label>
+            <input type="text" id="spotlightFormDay" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Monday Special">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Category Tag</label>
+            <input type="text" id="spotlightFormTag" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="CHEF'S DAILY PICK">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase mb-1">Cake Title</label>
+          <input type="text" id="spotlightFormTitle" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Batch Number</label>
+            <input type="text" id="spotlightFormBatch" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Batch #B-301">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Stock Left Text</label>
+            <input type="text" id="spotlightFormStock" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Only 3 Left Today">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Price (₹)</label>
+            <input type="number" id="spotlightFormPrice" required min="1" class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-charcoal uppercase mb-1">Original Price (₹)</label>
+            <input type="number" id="spotlightFormOriginalPrice" min="1" class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase mb-1">Description</label>
+          <textarea id="spotlightFormDesc" rows="3" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase mb-1">Image URL / Path</label>
+          <input type="text" id="spotlightFormImage" required class="w-full px-3.5 py-2 text-sm rounded-xl border border-borderSubtle focus:ring-2 focus:ring-primary focus:outline-none">
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3 border-t border-borderSubtle">
+          <button type="button" onclick="closeSpotlightModal()" class="px-5 py-2 rounded-full border border-borderSubtle text-stoneGrey text-xs font-bold hover:bg-canvas">
+            Cancel
+          </button>
+          <button type="submit" class="px-6 py-2 bg-primary hover:bg-primaryHover text-white rounded-full text-xs font-bold shadow-md">
+            Update Spotlight
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-white border border-primary/30 shadow-2xl rounded-2xl p-4 flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="w-8 h-8 rounded-full bg-surfaceAccent text-primary flex items-center justify-center shrink-0">
+      <i data-lucide="check" class="w-4 h-4"></i>
+    </div>
+    <div>
+      <h5 id="toastTitle" class="text-xs font-bold text-charcoal">Updated!</h5>
+      <p id="toastMessage" class="text-[11px] text-stoneGrey">Changes synced to server.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-borderSubtle py-4 text-center text-xs text-stoneGrey">
+    Siddhivinayak Cake Shop Owner Console &bull; Real-Time Order Dispatch & Audio Alerts Enabled
+  </footer>
+
+  <!-- Modular Admin Engine -->
+  <script src="js/admin.js"></script>
+</body>
+</html>
+

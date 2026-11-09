@@ -1,0 +1,61 @@
+/* Siddhivinayak Cake Shop - Confectionery Theme Styles */
+
+body {
+  background-color: #FFFBF7;
+  color: #1E2229;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Epilogue', sans-serif;
+}
+
+/* Soft organic backdrop blob behind cake */
+.hero-pink-blob {
+  background: #FFE8EC;
+  border-radius: 46% 54% 53% 47% / 54% 48% 52% 46%;
+  filter: blur(12px);
+  opacity: 0.85;
+}
+
+/* Gold seal badge styling */
+.premium-badge {
+  background: radial-gradient(circle, #FDE88F 0%, #F5C658 100%);
+  box-shadow: 0 8px 20px -4px rgba(245, 198, 88, 0.4);
+}
+
+/* Custom scrollbars */
+.custom-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #FFE4E9;
+  border-radius: 9999px;
+}
+
+/* Floating animation */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1.5deg); }
+}
+.floating-badge {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+/* Admin Alert Pulse Ring */
+@keyframes pulseRing {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 51, 102, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 51, 102, 0); }
+}
+.bell-pulse {
+  animation: pulseRing 2s infinite;
+}
+
+/* Modal dialog transitions */
+.modal-enter {
+  opacity: 1;
+  transform: scale(1);
+}
+

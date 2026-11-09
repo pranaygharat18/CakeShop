@@ -1,0 +1,24 @@
+{
+  "name": "siddhivinayak-cake-shop",
+  "version": "2.0.0",
+  "description": "Clean modular production architecture for Siddhivinayak Cake Shop",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "seed": "node backend/seed.js",
+    "dev": "nodemon backend/server.js",
+    "test": "node -c backend/server.js && node -c frontend/js/app.js && node -c frontend/js/admin.js"
+  },
+  "keywords": ["bakery", "cake-shop", "ecommerce", "real-time", "socket-io", "express"],
+  "author": "Siddhivinayak Cake Shop",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.12.0",
+    "socket.io": "^4.8.4"
+  }
+}
