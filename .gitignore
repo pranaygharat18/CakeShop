@@ -23,3 +23,6 @@ Thumbs.db
 *preview*.png
 *shot*.png
 
+
+# Local Netlify folder
+.netlify
