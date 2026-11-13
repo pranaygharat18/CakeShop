@@ -25,6 +25,23 @@ h1, h2, h3, .font-display {
   scrollbar-width: none;
 }
 
+/* Hero Confectionery Background & Animation Styles (Inspired by Reference) */
+.hero-confectionery-bg {
+  background-color: #FFF5F7;
+  background: radial-gradient(circle at 85% 45%, #FFE2EA 0%, #FFF5F8 45%, #FFF0F4 100%);
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(8px) rotate(-2deg); }
+}
+.animate-floatReverse {
+  animation: floatReverse 4.5s ease-in-out infinite;
+}
+.animate-floatSlow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
 /* Soft organic backdrop blob behind cake */
 .hero-pink-blob {
   background: #FFE8EC;
